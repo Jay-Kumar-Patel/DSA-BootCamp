@@ -17,3 +17,32 @@ class Solution {
         return;
     }
 }
+
+//Iterative approach (without recursion)
+
+/*class Solution {
+    public List<Integer> preorderTraversal(TreeNode root) {
+        List<Integer> ans = new ArrayList<>();
+        Stack<TreeNode> stack = new Stack<>();
+        
+        if(root == null)
+            return ans;
+        
+        stack.push(root);
+        
+        while(!stack.isEmpty()){
+            TreeNode currNode = stack.pop();
+            ans.add(currNode.val);
+            
+            if(currNode.right != null){
+                stack.push(currNode.right);
+            }
+            
+            if(currNode.left != null){
+                stack.push(currNode.left);
+            }
+        }
+        
+        return ans;
+    }
+} */
