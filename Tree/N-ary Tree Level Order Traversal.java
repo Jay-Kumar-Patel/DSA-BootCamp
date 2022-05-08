@@ -12,13 +12,11 @@ class Solution {
         while(!queue.isEmpty()){
             
             int currSize = queue.size();
-            
             List<Integer> currLevel = new ArrayList<>();
             
             while(currSize > 0){
                 
                 Node currNode = queue.remove();
-                
                 currLevel.add(currNode.val);
 
                 for(Node currChild : currNode.children)
