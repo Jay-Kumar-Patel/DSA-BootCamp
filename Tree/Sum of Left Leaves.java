@@ -45,6 +45,7 @@ class Solution {
         
         while(!queue.isEmpty()){
             Pair currPair = queue.remove();
+            
             TreeNode currNode = currPair.node;
             boolean isLeft = currPair.isLeftNode;
             
@@ -54,6 +55,7 @@ class Solution {
             
             if(currNode.left!=null)
                 queue.add(new Pair(currNode.left,true));
+                
             if(currNode.right!=null)
                 queue.add(new Pair(currNode.right,false));
         }
