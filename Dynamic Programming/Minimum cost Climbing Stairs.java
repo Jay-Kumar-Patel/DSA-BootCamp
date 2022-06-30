@@ -1,3 +1,4 @@
+//Java Code
 class Solution {
     public int minCostClimbingStairs(int[] cost) {
         HashMap<Integer, Integer> memo = new HashMap<Integer, Integer>();
