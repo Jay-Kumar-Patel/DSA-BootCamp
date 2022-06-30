@@ -1,3 +1,4 @@
+//Java Code
 class Solution {
     public int fib(int n) {
         return fibnum(n, new HashMap<Integer, Integer>());
@@ -22,3 +23,32 @@ class Solution {
         return a+b;
     }
 }
+
+
+
+
+
+//C++ Code
+class Solution {
+public:
+    int fib(int n) {
+        unordered_map<int,int> memo;
+        return fibonacci(n,memo);
+    }
+    
+    int fibonacci(int n, unordered_map<int,int>& memo){
+        
+        if(n == 0 || n == 1)
+            return n;
+        
+        if(memo.find(n) != memo.end())
+            return memo[n];
+        
+        int a = fibonacci(n-1, memo);
+        int b = fibonacci(n-2, memo);
+        
+        memo[n] = a+b;
+        
+        return a+b;
+    }
+};
