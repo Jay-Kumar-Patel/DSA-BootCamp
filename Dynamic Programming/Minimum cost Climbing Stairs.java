@@ -26,3 +26,34 @@ class Solution {
         return Math.min(oneJump,twoJump);
     }
 }
+
+
+
+
+
+//C++ Code
+class Solution {
+public:
+    int minCostClimbingStairs(vector<int>& cost) {
+        unordered_map<int,int> memo;
+        return min(minCostPath(0,cost,memo),memo[1]);
+    }
+    
+    int minCostPath(int currInd, vector<int>& cost, unordered_map<int,int>& memo){
+        
+        if(currInd == cost.size())
+            return 0;
+        if(currInd > cost.size())
+            return 100001;
+        
+        if(memo.find(currInd) != memo.end())
+            return memo[currInd];
+        
+        int oneStep = cost[currInd] + minCostPath(currInd+1,cost,memo);
+        int twoStep = cost[currInd] + minCostPath(currInd+2,cost,memo);
+        
+        memo[currInd] = min(oneStep,twoStep);
+        
+        return min(oneStep,twoStep);
+    }
+};
