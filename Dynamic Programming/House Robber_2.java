@@ -1,3 +1,4 @@
+//Java Code
 class Solution {
     public int rob(int[] nums) {
         HashMap<Integer, Integer> memo1 = new HashMap<Integer, Integer>();
@@ -25,3 +26,37 @@ class Solution {
         return Math.max(rob,noRob);
     }
 }
+
+
+
+
+
+//C++ Code
+class Solution {
+public:
+    int rob(vector<int>& nums) {
+        unordered_map<int,int> memo0;
+        unordered_map<int,int> memo1;
+        
+        if(nums.size() == 1)
+            return nums[0];
+        
+        return max(maxRob(0,nums,memo0,nums.size()-1),maxRob(1,nums,memo1,nums.size()));
+    }
+    
+    int maxRob(int currHouse, vector<int>& nums, unordered_map<int,int>& memo, int endHouse){
+        
+        if(currHouse >= endHouse)
+            return 0;
+        
+        if(memo.find(currHouse) != memo.end())
+            return memo[currHouse];
+        
+        int consider = nums[currHouse] + maxRob(currHouse+2, nums, memo, endHouse);
+        int notConsider = maxRob(currHouse+1, nums, memo, endHouse);
+        
+        memo[currHouse] = max(consider, notConsider);
+        
+        return max(consider, notConsider);
+    }
+};
