@@ -1,3 +1,4 @@
+//Java Code
 class Solution {
     public int tribonacci(int n) {
         HashMap<Integer, Integer> memo = new HashMap<Integer, Integer>();
@@ -26,3 +27,34 @@ class Solution {
         return a+b+c;
     }
 }
+
+
+
+
+
+//C++ Code
+class Solution {
+public:
+    int tribonacci(int n) {
+        unordered_map<int,int> memo;
+        return tri(n,memo);
+    }
+    
+    int tri(int n, unordered_map<int,int>& memo){
+        
+        if(n==0 || n==1)
+            return n;
+        if(n == 2)
+            return 1;
+        
+        if(memo.find(n) != memo.end())
+            return memo[n];
+        
+        int a = tri(n-1,memo);
+        int b = tri(n-2,memo);
+        int c = tri(n-3,memo);
+        
+        memo[n] = a+b+c;
+        return a+b+c;
+    }
+};
