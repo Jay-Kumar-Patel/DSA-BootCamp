@@ -1,3 +1,4 @@
+//Java Code
 class Solution 
 { 
     public int knapSack(int W, int wt[], int val[], int n) 
@@ -29,3 +30,40 @@ class Solution
         return Math.max(consider,notconsider);
     } 
 }
+
+
+
+
+
+//C++ Code
+class Solution
+{
+    public:
+    int knapSack(int W, int wt[], int val[], int n) 
+    { 
+        unordered_map<string,int> memo;
+        return maxProfit(0,W,wt,val,n,memo);
+    }
+    
+    int maxProfit(int currIndex, int W, int wt[], int val[], int n, unordered_map<string,int>& memo){
+        
+        if(currIndex == n)
+            return 0;
+            
+        string currentKey  = to_string(currIndex) + "-" + to_string(W);
+        
+        if(memo.find(currentKey) != memo.end())
+            return memo[currentKey];
+        
+        int consider = 0;
+        if(W >= wt[currIndex]){
+            consider = val[currIndex] + maxProfit(currIndex+1, W-wt[currIndex], wt, val, n, memo);
+        }
+        
+        int notConsider = maxProfit(currIndex+1, W, wt, val, n, memo);
+        
+        memo[currentKey] = max(consider, notConsider);
+        return max(consider, notConsider);
+        
+    }
+};
