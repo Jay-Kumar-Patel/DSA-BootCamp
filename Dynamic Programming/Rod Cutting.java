@@ -1,3 +1,4 @@
+//Java Code
 class Solution{
     public int cutRod(int price[], int n) {
         int[][] memo = new int[price.length][n+1];
@@ -35,3 +36,40 @@ class Solution{
         return Math.max(consider,notconsider);
     }
 }
+
+
+
+
+
+//C++ Code
+class Solution{
+  public:
+    int cutRod(int price[], int n) {
+        
+        unordered_map<string,int> memo;
+        return maxProfit(0,price,memo,n,n);
+    }
+    
+    int maxProfit(int currIndex, int prices[], unordered_map<string,int>& memo, int currLength, int n){
+        
+        if(currIndex >= n)
+            return 0;
+        
+        if(currLength == 0)
+            return 0;
+        
+        string currKey = to_string(currIndex) + "-" + to_string(currLength);
+        
+        if(memo.find(currKey) != memo.end())
+            return memo[currKey];
+        
+        int consider = 0;
+        if(currLength >= currIndex+1)
+            consider = prices[currIndex] + maxProfit(currIndex,prices,memo,currLength-(currIndex+1),n);
+        
+        int notConsider =  maxProfit(currIndex+1,prices,memo,currLength,n);
+        
+        memo[currKey] = max(consider, notConsider);
+        return max(consider, notConsider);
+    }
+};
