@@ -1,0 +1,39 @@
+class Solution {
+public:
+    vector<vector<int>> combinationSum2(vector<int>& candidates, int target) {
+    
+        sort(candidates.begin(),candidates.end());
+        set<vector<int>> ans;
+        vector<int> currSubset; 
+        getCombinations(candidates,0,currSubset,ans,target);
+        vector<vector<int>> finalans(ans.begin(),ans.end());
+        return finalans;
+        
+    }
+    
+
+    void getCombinations(vector<int>& candidates, int currIndex, vector<int>& currSubset, set<vector<int>>& ans, int target){
+        
+        if(target == 0){
+            vector<int> temp = currSubset;
+            ans.insert(temp);
+            return;
+        }
+        
+        if(currIndex == candidates.size())
+            return;
+        
+        if(candidates[currIndex] <= target){
+            currSubset.push_back(candidates[currIndex]);
+            getCombinations(candidates,currIndex+1,currSubset,ans,target-candidates[currIndex]);
+            currSubset.pop_back();
+        }
+        
+        while(currIndex+1<candidates.size() && candidates[currIndex] == candidates[currIndex+1])
+            currIndex++;
+        
+        getCombinations(candidates,currIndex+1,currSubset,ans,target);
+        
+        return;
+    }
+};
