@@ -1,0 +1,37 @@
+class Solution {
+public:
+    vector<vector<int>> subsetsWithDup(vector<int>& nums) {
+
+        sort(nums.begin(),nums.end());
+        vector<vector<int>> ans;
+        vector<int> currSubset;
+        map<vector<int>,int> m;
+        generateSubsets(nums,0,currSubset,ans,m);
+        
+        vector<int> v; // to add empty subset
+        ans.push_back(v);
+        return ans;
+
+    }
+    
+    void generateSubsets(vector<int>& nums, int currIndex, vector<int>& currSubset, vector<vector<int>>& ans, map<vector<int>,int>& m){
+        
+        if(currIndex == nums.size()){
+            if(m[currSubset] == 1){     //check that currSubset has only one frequency
+                vector<int> temp = currSubset;
+                ans.push_back(temp);
+            }
+
+            return;
+        }
+        
+        currSubset.push_back(nums[currIndex]);
+        m[currSubset]++;     //put currSubset in map or if already present then increase the frequnecy of that currSubset
+        generateSubsets(nums,currIndex+1,currSubset,ans,m);
+        currSubset.pop_back();
+        
+        generateSubsets(nums,currIndex+1,currSubset,ans,m);
+        
+        return;
+    }
+};
