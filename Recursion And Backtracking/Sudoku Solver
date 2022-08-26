@@ -1,0 +1,79 @@
+class Solution {
+public:
+    void solveSudoku(vector<vector<char>>& board) {
+        fillUpTheSudoku(board,0,0);
+        return;
+    }
+    
+    bool fillUpTheSudoku(vector<vector<char>>& board, int m, int n){
+        
+        if(m == 9)
+            return true;
+        
+        int nextRow = -1;
+        int nextCol = -1;
+        
+        if(n == 8){
+            nextRow = m+1;
+            nextCol = 0;
+        }
+        else{
+            nextRow = m;
+            nextCol = n+1;
+        }
+        
+        if(board[m][n] != '.')
+            return fillUpTheSudoku(board,nextRow,nextCol);
+        
+        for(char currVal='1'; currVal<='9'; currVal++){
+        
+            if(isSafe(board,m,n,currVal)){
+                board[m][n] = currVal;
+                
+                if(fillUpTheSudoku(board,nextRow,nextCol)){
+                    return true;
+                }
+                
+                board[m][n] = '.';
+            }
+        }
+        
+        return false;
+    }
+    
+    bool isSafe(vector<vector<char>>& board, int m, int n, char currVal){
+        return isRowSafe(board,m,currVal) && isColSafe(board,n,currVal) && isGridSafe(board,m,n,currVal);
+    }
+    
+    bool isRowSafe(vector<vector<char>>& board,int m, char currVal){
+        for(int i=0;i<9;i++){
+            if(board[m][i] == currVal){
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    bool isColSafe(vector<vector<char>>& board,int n, char currVal){
+        for(int i=0;i<9;i++){
+            if(board[i][n] == currVal){
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    bool isGridSafe(vector<vector<char>>& board,int m, int n, char currVal){
+        int currRowStart = 3 * (m/3);
+        int currColStart = 3 * (n/3);
+        
+        for(int i=currRowStart;i<=currRowStart+2;i++){
+            for(int j=currColStart;j<=currColStart+2;j++){
+                if(board[i][j] == currVal){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+};
