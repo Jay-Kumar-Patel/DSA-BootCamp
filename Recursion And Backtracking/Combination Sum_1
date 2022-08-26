@@ -1,0 +1,34 @@
+class Solution {
+public:
+    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+    
+        vector<vector<int>> ans;
+        vector<int> currSubset;
+        getCombinations(candidates,0,currSubset,ans,target);
+        return ans;
+        
+    }
+    
+
+    void getCombinations(vector<int>& candidates, int currIndex, vector<int>& currSubset, vector<vector<int>>& ans, int target){
+        
+        if(currIndex == candidates.size())
+            return;
+        
+        if(target == 0){
+            vector<int> temp = currSubset;
+            ans.push_back(temp);
+            return;
+        }
+        
+        if(candidates[currIndex] <= target){
+            currSubset.push_back(candidates[currIndex]);
+            getCombinations(candidates,currIndex,currSubset,ans,target-candidates[currIndex]);
+            currSubset.pop_back();
+        }
+        
+        getCombinations(candidates,currIndex+1,currSubset,ans,target);
+        
+        return;
+    }
+};
