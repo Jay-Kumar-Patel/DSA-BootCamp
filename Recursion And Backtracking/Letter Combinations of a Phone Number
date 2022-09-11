@@ -1,0 +1,31 @@
+class Solution {
+public:
+    
+    vector<string> KEYPAD = {" "," ","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
+    
+    vector<string> letterCombinations(string digits) {
+        vector<string> ans;
+        
+        if(digits.length() == 0)
+            return ans;
+        
+        getCombination(digits,0,"",ans);
+        return ans;
+    }
+    
+    void getCombination(string digits, int currIndex, string currString, vector<string>& ans){
+        
+        if(currIndex == digits.length()){
+            ans.push_back(currString);
+            return;
+        }
+        
+        string currLetters = KEYPAD[digits[currIndex] - '0'];
+        
+        for(int i=0; i<currLetters.length();i++){
+            getCombination(digits,currIndex+1,currString + currLetters[i],ans);
+        }
+        
+        return;
+    }
+};
