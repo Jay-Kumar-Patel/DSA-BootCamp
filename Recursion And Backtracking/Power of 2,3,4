@@ -1,0 +1,50 @@
+//Power Of Two
+class Solution {
+public:
+    bool isPowerOfTwo(int n) {
+        
+        if(n <= 0)
+            return false;
+        
+        if(n == 1 || n == 2)
+            return true;
+        
+        return n%2 == 0 && isPowerOfTwo(n/2);
+    }
+};
+
+
+
+
+//Power Of Three
+class Solution {
+public:
+    bool isPowerOfThree(int n) {
+        
+        if(n <= 0)
+            return false;
+        
+        if(n == 1 || n == 3)
+            return true;
+        
+        return n%3 == 0 && isPowerOfThree(n/3);
+    }
+};
+
+
+
+
+//Power Of Four
+class Solution {
+public:
+    bool isPowerOfFour(int n) {
+        
+        if(n <= 0)
+            return false;
+        
+        if(n == 1 || n == 4)
+            return true;
+        
+        return n%4 == 0 && isPowerOfFour(n/4);
+    }
+};
