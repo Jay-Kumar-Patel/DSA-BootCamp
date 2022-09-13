@@ -1,0 +1,42 @@
+class Solution {
+public:
+    vector<vector<string>> partition(string s) {
+        vector<vector<string>> ans;
+        vector<string> currCombination;
+        getAllCombination(s,0,s.length()-1,currCombination,ans);
+        return ans;
+    }
+    
+    
+    void getAllCombination(string s, int start, int end, vector<string>& currCombination, vector<vector<string>>& ans){
+        
+        if(start > end){
+            vector<string> temp = currCombination;
+            ans.push_back(temp);
+            return;
+        }
+        
+        for(int i=start;i<=end;i++){
+            
+            if(isPalindrome(s,start,i)){
+                currCombination.push_back(s.substr(start,i-start+1));
+                getAllCombination(s,i+1,end,currCombination,ans);
+                currCombination.pop_back();
+            }
+        }
+        
+        return;
+    }
+    
+    
+    bool isPalindrome(string s, int left, int right){ 
+        while(left <= right){
+            if(s[left]!=s[right])
+                return false;
+            left++;
+            right--;
+        }
+        return true;
+    }
+    
+};
