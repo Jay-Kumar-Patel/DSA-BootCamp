@@ -1,0 +1,32 @@
+class solution{
+    public:
+    vector<int> bfsOfGraph(int V, vector<int> adj[]) {
+        
+        vector<int> ans;
+        vector<bool> visited(V, false);
+        
+        queue<int> q;
+        q.push(0);
+        
+        while(!q.empty()){
+            
+            int currVertex = q.front();
+            q.pop();
+            
+            if(visited[currVertex]){
+                continue;
+            }
+            
+            visited[currVertex] = true;
+            ans.push_back(currVertex);
+            
+            vector<int> neighbours = adj[currVertex];
+            
+            for(int currneighbour : neighbours){
+                q.push(currneighbour);
+            }
+        }
+        
+        return ans;
+    }
+};
