@@ -1,0 +1,20 @@
+class Solution {
+public:
+    int findJudge(int n, vector<vector<int>>& trust) {
+        
+        vector<int> indegree(n+1,0);
+        vector<int> outdegree(n+1,0);
+        
+        for(auto curr : trust){
+            outdegree[curr[0]]++;
+            indegree[curr[1]]++;
+        }
+        
+        for(int currPeople=1; currPeople<=n; currPeople++){
+            if(indegree[currPeople] == n-1 && outdegree[currPeople] == 0)
+                return currPeople;
+        }
+        
+        return -1;
+    }
+};
