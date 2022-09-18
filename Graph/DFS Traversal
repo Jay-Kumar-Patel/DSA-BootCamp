@@ -1,0 +1,26 @@
+vector<int> dfsOfGraph(int V, vector<int> adj[]) {
+        
+    vector<int> ans;
+    vector<bool> visited(V,false);
+    dfs(adj,0,ans,visited);
+    return ans;
+}
+    
+void dfs(vector<int> adj[], int currVertex, vector<int>& ans, vector<bool>& visited){
+        
+    if(visited[currVertex]){
+        return;
+    }
+        
+    visited[currVertex] = true;
+    ans.push_back(currVertex);
+        
+    vector<int> neighbours = adj[currVertex];
+        
+    for(int currneighbour : neighbours){
+        dfs(adj,currneighbour,ans,visited);
+    }
+        
+    return;
+}   
+    
