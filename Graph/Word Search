@@ -1,0 +1,39 @@
+class Solution {
+public:
+    bool exist(vector<vector<char>>& board, string word) {
+        
+        int m = board.size();
+        int n = board[0].size();
+        
+        for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++){
+                if(board[i][j] == word[0]){
+                    if(isWordPresent(board,i,j,0,word,m,n))
+                        return true;
+                }
+            }
+        }
+        
+        return false;
+    }
+    
+    bool isWordPresent(vector<vector<char>>& board, int currRow, int currCol, int currIndex, string word, int m, int n){
+        
+        if(currIndex >= word.length())
+            return true;
+        
+        if(currRow<0 || currRow>=m || currCol<0 || currCol>=n || board[currRow][currCol] != word[currIndex])
+            return false;
+        
+        char temp = board[currRow][currCol];
+        board[currRow][currCol] = '.';
+        
+        bool present = isWordPresent(board,currRow+1,currCol,currIndex+1,word,m,n) ||
+                  isWordPresent(board,currRow-1,currCol,currIndex+1,word,m,n) ||
+                  isWordPresent(board,currRow,currCol+1,currIndex+1,word,m,n) ||
+                  isWordPresent(board,currRow,currCol-1,currIndex+1,word,m,n);
+        
+        board[currRow][currCol] = temp;
+        return present;
+    }
+};
