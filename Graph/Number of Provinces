@@ -1,0 +1,36 @@
+class Solution {
+public:
+    int findCircleNum(vector<vector<int>>& isConnected) {
+        
+        int ans = 0;
+        int m = isConnected.size();
+        vector<bool> visited(m, false);
+        
+        for(int currCity=0 ;currCity<m; currCity++){
+            if(visited[currCity] == false){
+                dfs(currCity,isConnected,visited);
+                ans++;
+            }
+        }
+        
+        return ans;
+    }
+    
+    void dfs(int currCity, vector<vector<int>>& isConnected, vector<bool>& visited){
+        
+        if(visited[currCity])
+            return;
+        
+        visited[currCity] = true;
+        
+        vector<int> neighbours = isConnected[currCity];
+        
+        for(int currneighbour=0; currneighbour<neighbours.size(); currneighbour++){
+            if(neighbours[currneighbour] == 1){
+                dfs(currneighbour,isConnected,visited);
+            }
+        }
+        
+        return;
+    }
+};
